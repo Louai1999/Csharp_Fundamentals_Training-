@@ -149,10 +149,27 @@
                         default: Console.WriteLine("Invalid option. Please choose 1–13 or 0 to finish");
                         break;
 
-
-
-
                 }//switch end
+
+                ///Task 2 ATM Service ///
+                bool menuDone = false;
+                while (menuDone)
+                {
+                    Console.WriteLine("--National Bank of Oman--");
+                    Console.WriteLine($"1) ATM Service ");
+                    Console.WriteLine($"2) Account Management ");
+                    Console.WriteLine($"3) Lone Services");
+                    Console.WriteLine($"4) Currency Exchange");
+                    Console.WriteLine($"5) Credit Card Portal");
+                    Console.WriteLine($"6) Branch Service ");
+                    Console.WriteLine($"7) Reports & Admin");
+                    Console.WriteLine($"0) Exit");
+                    int menuChoice = Convert.ToInt32(Console.ReadLine());
+
+
+                }//while end
+
+
 
 
 
@@ -160,7 +177,11 @@
 
 
 
+        }
+
+
+
 
         }
     }
-}
+
