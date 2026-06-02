@@ -43,6 +43,8 @@
 
         }
 
+        //خطوات تسجيل الدخول للعميل
+
         public static void RegisterMember()
         {
             Console.WriteLine("Please enter your name:");
@@ -80,9 +82,18 @@
 
         }
 
-        public static bool SearchBookByTitle(string keyword) // في هذه الدالة نستخدمها في حال بغينا البحث او طريقة للبحث
+        public static void SearchBookByTitle(string keyword) // في هذه الدالة نستخدمها في حال بغينا البحث او طريقة للبحث
         {
-            return bookTitle.ToLower().Contains(keyword.ToLower());
+            bool found = bookTitle.ToLower().Contains(keyword.ToLower());
+            if (found == true)
+            {
+                Console.WriteLine("We found the book");
+            }
+            else 
+            {
+                Console.WriteLine("Sorry we didnt found book");
+            }
+            
 
         }
 
