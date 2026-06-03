@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.ComponentModel.Design;
+using System.Runtime.InteropServices;
 
 namespace Array_Fanctions
 {
@@ -60,7 +61,18 @@ namespace Array_Fanctions
                 Console.WriteLine("Product " + (i + 1) + ": " + productPrise[i]);
             }
 
-            Array.IndexOf()
+            int index = Array.IndexOf(productPrise, 4.99);
+            if (index == -1)
+            {
+                Console.WriteLine("Price not found");
+            }
+            else
+            {
+                Console.WriteLine("We found the price");
+            }
+
+              
+                    
         }
 
 
@@ -82,29 +94,44 @@ namespace Array_Fanctions
 
         static void Main(string[] args)
         {
-            switch (args.Length) {
+            Console.WriteLine("==Select Option==");
+            Console.WriteLine("1. Temperature");
+            Console.WriteLine("2. Student Score Board");
+            Console.WriteLine("3. Product Price Finder");
+            Console.WriteLine("4. Race Finish Times");
+            Console.WriteLine("5. Classroom Grade Report");
+            Console.WriteLine("6. Warehouse inventory check");
+            Console.WriteLine("7. Library shelf Scanner");
+            Console.WriteLine("0. Exit");
+            string option = Console.ReadLine();
 
-                case 1:
+            switch (option)
+            {
+
+                case "1":
                     temperature();
                     break;
 
-                case 2:
+                case "2":
                     studentScore();
 
                     break;
-                case 3:
+                case "3":
+                    productPrise();
                     break;
 
-                case 4:
+                case "4":
                     break;
 
-                case 5:
+                case "5":
                     break;
 
-                case 6:
+                case "6":
                     break;
 
-                case 7:
+                case "7":
+                    break;
+                case "8":
                     break;
 
 
