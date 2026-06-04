@@ -23,15 +23,15 @@ namespace ListsFunction
 
         public static void problem1()
         {
-            List<double> list = [2.2,3.3,4.4,5.5,6.6,7.7,8.8];
+            List<double> list = [2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8];
             for (int i = 0; i < list.Count; i++)
             {
-              Console.WriteLine($"Day {i+1}:  " + list[i]  );
+                Console.WriteLine($"Day {i + 1}:  " + list[i]);
 
             }
 
             Console.WriteLine();
-             Console.WriteLine("Total: "+ list.Count);
+            Console.WriteLine("Total: " + list.Count);
 
 
         }
@@ -46,10 +46,10 @@ namespace ListsFunction
             }
 
             studentScores.Reverse();
-            
+
             foreach (int studentScore in studentScores)
             {
-                Console.WriteLine($"Lists:  {studentScore}");       
+                Console.WriteLine($"Lists:  {studentScore}");
             }
         }
 
@@ -61,7 +61,7 @@ namespace ListsFunction
                 Console.WriteLine($"Product price {i + 1}:" + productPrices[i]);
             }
 
-            if (productPrices.Contains(4.99) == true) 
+            if (productPrices.Contains(4.99) == true)
             {
                 Console.WriteLine("Product found");
             }
@@ -74,7 +74,7 @@ namespace ListsFunction
 
 
         }
-        
+
 
         public static void problem4()
         {
@@ -83,7 +83,7 @@ namespace ListsFunction
             {
                 Console.WriteLine($"Finish Time {finishTime}");
             }
-             finishTimes.Sort();
+            finishTimes.Sort();
 
             foreach (int finishTime in finishTimes)
             {
@@ -92,69 +92,118 @@ namespace ListsFunction
             Console.WriteLine(finishTimes.Count());
         }
 
+
         public static void problem5()
         {
+            List<int> grades = [55, 60, 65, 70, 75, 80, 85, 90, 95, 100];
 
+            grades.Sort();
+
+            grades.Reverse();
+
+            for (int i = 0; i < grades.Count; i++)
+            {
+                Console.WriteLine($"Rank {i + 1}: " + grades[i]);
+            }
 
 
         }
 
         public static void problem6()
         {
+            List<int> quantities = [80, 70, 60, 50, 40, 30, 20, 10];
+
+
+            int total = 0; // for calculate
+
+            for (int i = 0; i < quantities.Count; i++)
+            {
+                total = total + quantities[i];
+            }
+            Console.WriteLine("total element" + total);
+
+            //Average
+
+            Console.WriteLine("Average are :" + total / quantities.Count);
+
+            //For serch 
+            if (quantities.IndexOf(70) == -1)
+            {
+                Console.WriteLine("Not found");
+            }
+            else
+            {
+                Console.WriteLine("The element 70 in index: " + quantities.IndexOf(7));
+            }
+
 
         }
 
         public static void problem7()
         {
-
-        }
-
-
-        static void Main(string[] args)
-        {
-
-          
-            switch (Menu())
+            List<int> copies = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            foreach (int copy in copies)
             {
-                case "0":
-                    Console.WriteLine("Thank you :)");
-                    break;
+                Console.WriteLine($"Copies{copy}");
+            }
+            copies.Sort();
+            Console.WriteLine(copies[9]);
+            foreach (int copy in copies)
+            {
+                if (copy == 0)
+                {
+                    Console.WriteLine("Out of Stock");
 
-                case "1":
-                    problem1 ();
-                    break;
 
-                case "2":
-                    problem2 ();
-                    break;
+                }
 
-                case "3":
-                    problem3 ();
-                    break;
+            }
+            static void Main(string[] args)
+            {
 
-                case "4":
-                    problem4 ();
-                    break;
 
-                case "5":
-                    problem5 ();
-                    break;
+                switch (Menu())
+                {
+                    case "0":
+                        Console.WriteLine("Thank you :)");
+                        break;
 
-                case "6":
-                    problem6 ();
-                    break;
+                    case "1":
+                        problem1();
+                        break;
 
-                case "7":
-                    problem7 ();
-                    break;
-                
+                    case "2":
+                        problem2();
+                        break;
+
+                    case "3":
+                        problem3();
+                        break;
+
+                    case "4":
+                        problem4();
+                        break;
+
+                    case "5":
+                        problem5();
+                        break;
+
+                    case "6":
+                        problem6();
+                        break;
+
+                    case "7":
+                        problem7();
+                        break;
+
+
+
+
+                }
 
 
 
             }
-
-
-
         }
     }
-}
+    
