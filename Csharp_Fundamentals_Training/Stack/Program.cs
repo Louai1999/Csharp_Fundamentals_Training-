@@ -140,14 +140,64 @@ namespace Stack
 
             Console.WriteLine("This the final Action:" + tempStack);
 
-
-
-
         }
 
 
         public static void p4()
         {
+            Queue<string> triageQueue = new Queue<string>();
+            Queue<string> tempQueue = new Queue<string>();
+
+            triageQueue.Enqueue("Salim");
+            triageQueue.Enqueue("ahmed");
+            triageQueue.Enqueue("hamid");
+            triageQueue.Enqueue("mohammed");
+            triageQueue.Enqueue("louai");
+            triageQueue.Enqueue("ayhem");
+            triageQueue.Enqueue("fahad");
+            triageQueue.Enqueue("shaheen");
+
+            int counter = 1;
+            foreach (string position in triageQueue)
+            {
+                Console.WriteLine($"{counter}. {position} " );
+                counter++;
+            }
+
+            triageQueue.Peek();
+
+            triageQueue.Dequeue();
+            triageQueue.Dequeue();
+            triageQueue.Dequeue();
+
+            foreach (string position in tempQueue)
+            {
+                Console.WriteLine($"In queue: { position}");
+            }
+
+            string patientToRemove = "ayhem";
+
+            while (triageQueue.Count > 0)
+            {
+                string patient = triageQueue.Dequeue();
+
+                if (patient != patientToRemove)
+                {
+                    tempQueue.Enqueue(patient);
+                }
+            }
+            Console.WriteLine("Final queue count: " + tempQueue.Count);
+
+            foreach (string p in tempQueue)
+            {
+                Console.WriteLine(p);
+            }
+
+            Console.WriteLine("Final are :"+ tempQueue.Count);
+
+
+
+
 
         }
 
