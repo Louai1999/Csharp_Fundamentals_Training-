@@ -153,9 +153,9 @@ namespace ListsFunction
                 if (copy == 0)
                 {
                     Console.WriteLine("Out of Stock");
-
-
                 }
+
+        }
 
             }
             static void Main(string[] args)
