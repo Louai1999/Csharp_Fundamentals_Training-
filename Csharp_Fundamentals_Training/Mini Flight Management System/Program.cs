@@ -7,13 +7,21 @@ namespace Mini_Flight_Management_System
     {
         //Storage 
         static List<string> passengerNames = new List<string> { "Ali", "Ahmed", "Fahad", "Louai", "Salim" };
+
         static List<string> ticketNumbers = new List<string> {"T001","T002","T003","T004","T005"};
+        
         static string[] flightNumbers = {"OA101,OA102,OA103,OA104,OA105,OA106"};
+        
         static List<string> availableDate = new List<string> { "01-10-2026,02-10-2026,03-10-2026,04-10-2026" };
+        
         static Dictionary<string, string> bookingRecord = new Dictionary<string, string>{ {"T001", "OA101|12-Jan-2026"}, {"T002", "OA102|15-Jan-2026"} };
+        
         Queue<string> checkedInQueue = new Queue<string> ();
+        
         Stack<string> boardingStack = new Stack<string>();
+        
         static List<string> cancelledTickets = new List<string>();
+        
         Dictionary<string, string> passengerSeatMap = new Dictionary<string, string>();
 
 
@@ -36,7 +44,7 @@ namespace Mini_Flight_Management_System
             Console.WriteLine("0.Exit");
 
             return Console.ReadLine();
-        }
+        } //Menu
 
         public static void RegisterNewPassenger()
         {
@@ -70,7 +78,7 @@ namespace Mini_Flight_Management_System
             Console.WriteLine("Registered Ticket ID" + ticketID);
             
 
-        }
+        } //1
 
         public static void ViewAllPassengers()
         {
@@ -95,7 +103,7 @@ namespace Mini_Flight_Management_System
             }
 
 
-        }
+        } //2
 
 
         public static void BookFlightTicket()
@@ -163,7 +171,9 @@ namespace Mini_Flight_Management_System
 
             //6 booking record
 
+            bookingRecord[ID] = $"{selectFlight}|{selectedDate}";
 
+            string flight = bookingRecord[ID].Split('|')[0];
 
 
 
@@ -183,7 +193,7 @@ namespace Mini_Flight_Management_System
 
 
 
-        } //still requirment /6/7
+        }  //3
 
 
         public static void ViewBookingDetails()
@@ -221,26 +231,37 @@ namespace Mini_Flight_Management_System
                 return;
             }
 
+            //4
+            if(bookingRecord.TryGetValue(validate,out string rawBookingValue))
+            {
+                Console.WriteLine("No booking found for this ticket");
+                return;
+            }
+
+            //5
+
+                
+                
 
 
 
 
+                        
 
 
 
-
-
-        }
+        } //4
 
 
         public static void UpdateBooking()
         {
-        }
+
+        } // 5
 
 
         public static void CancelTicket()
         {
-        }
+        } //6
 
 
         public static void PassengerCheckIn()
