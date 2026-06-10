@@ -198,12 +198,13 @@ namespace ListsFunction
 
 
 
-
                 }
+            Console.ReadKey();
+            Console.Clear();
 
 
 
-            }
         }
+    }
     }
     

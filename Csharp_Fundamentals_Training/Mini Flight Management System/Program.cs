@@ -255,12 +255,107 @@ namespace Mini_Flight_Management_System
 
         public static void UpdateBooking()
         {
+            Console.WriteLine(" Please enter your ticket ID");
+            string ticketID = Console.ReadLine() ?.Trim().ToUpper();
 
-        } // 5
+            int matchingTiket = ticketNumbers.IndexOf(ticketID);
+
+            if (matchingTiket == -1)
+            {
+                Console.WriteLine("Please enter ticket ID");
+                return;
+            }
+
+            if (cancelledTickets.Contains(ticketID))
+            {
+                Console.WriteLine("This ticket are cancelled");
+                return;
+            }
+
+            if(!bookingRecord.TryGetValue(ticketID,out string booking ))
+            {
+                Console.WriteLine("This ticket has no booking");
+                return;
+            }
+
+            Console.WriteLine("Success: Ticket validated and booking record located!");
+
+
+            //2
+            
+           
+                Console.WriteLine($"Current flight {ticketID}");
+                Console.WriteLine($"Current date{booking}");
+
+
+
+            //3
+            Console.WriteLine("===================================================");
+            Console.WriteLine("What type of change do you want?");
+            Console.WriteLine("===================================================");
+            Console.WriteLine();
+            Console.WriteLine("1. Change flight please enter flight number");
+            Console.WriteLine("2. Change date please enter new date");
+            Console.WriteLine("3  Change both ");
+            Console.WriteLine("0  Cancel update");
+            string subChoice = Console.ReadLine()?.Trim();
+            if (subChoice =="0")
+            {
+                Console.WriteLine("Update cancelled. Returning to main menu...");
+                return;
+            }
+
+            if (subChoice == "1" || subChoice == "3")
+            {
+                Console.WriteLine("Available flights:  OA101,OA102,OA103,OA104,OA105,OA106 ");
+            }
+
+            Console.Write("Enter new flight number: ");
+            string inputFlight = Console.ReadLine()?.Trim().ToUpper();
+
+            if(string.IsNullOrEmpty(inputFlight))
+            {
+                Console.WriteLine("Error: Flight number cannot be empty.Update failed.");
+                return;
+            }
+
+
+            if(subChoice == "2" || subChoice =="3")
+            {
+                Console.WriteLine("Enter new date (YYY-MM_DD): ");
+                string inputData = Console.ReadLine()?.Trim();
+
+                if(string.IsNullOrEmpty(inputData))
+                {
+                    Console.WriteLine("Error: Date cannot be empty. Update failed.");
+                    return;
+                }
+
+            }
+            if(subChoice !="1" && subChoice != "2" && subChoice !="3")
+            {
+                Console.WriteLine("Invalid selection. Update failed.");
+                return;
+            }
+            
+
+
+            
+
+
+
+
+
+
+        } // 5 Still only 1 finish
 
 
         public static void CancelTicket()
         {
+
+
+
+
         } //6
 
 
@@ -337,14 +432,23 @@ namespace Mini_Flight_Management_System
                         ManageSeat();
                         break;
 
+                    case "11": 
+                        Console.WriteLine("Thank you for useing airline system ");
+                        lop = false; 
+                        break;
+
+                    default:
+                        Console.WriteLine("Error please choise correct number");
+                        break;
 
                 }
 
-
-                Console.WriteLine("Enter your choice");
-                Console.ReadKey();
-                Console.Clear();
-
+                if (lop)
+                { 
+                     Console.WriteLine("Enter your choice");
+                     Console.ReadKey();
+                     Console.Clear();
+                }
             } while (lop == true);
 
 
