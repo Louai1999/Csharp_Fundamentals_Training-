@@ -1,4 +1,5 @@
-﻿using System.Net.NetworkInformation;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Net.NetworkInformation;
 using System.Xml.Linq;
 
 namespace Mini_Flight_Management_System
@@ -255,108 +256,137 @@ namespace Mini_Flight_Management_System
 
         public static void UpdateBooking()
         {
-            Console.WriteLine(" Please enter your ticket ID");
-            string ticketID = Console.ReadLine() ?.Trim().ToUpper();
-
-            int matchingTiket = ticketNumbers.IndexOf(ticketID);
-
-            if (matchingTiket == -1)
-            {
-                Console.WriteLine("Please enter ticket ID");
-                return;
-            }
-
-            if (cancelledTickets.Contains(ticketID))
-            {
-                Console.WriteLine("This ticket are cancelled");
-                return;
-            }
-
-            if(!bookingRecord.TryGetValue(ticketID,out string booking ))
-            {
-                Console.WriteLine("This ticket has no booking");
-                return;
-            }
-
-            Console.WriteLine("Success: Ticket validated and booking record located!");
-
-
-            //2
             
-           
-                Console.WriteLine($"Current flight {ticketID}");
-                Console.WriteLine($"Current date{booking}");
+            
+                Console.Write("Enter ticket ID to update: ");
+                string validate = Console.ReadLine()?.Trim().ToUpper();
 
-
-
-            //3
-            Console.WriteLine("===================================================");
-            Console.WriteLine("What type of change do you want?");
-            Console.WriteLine("===================================================");
-            Console.WriteLine();
-            Console.WriteLine("1. Change flight please enter flight number");
-            Console.WriteLine("2. Change date please enter new date");
-            Console.WriteLine("3  Change both ");
-            Console.WriteLine("0  Cancel update");
-            string subChoice = Console.ReadLine()?.Trim();
-            if (subChoice =="0")
-            {
-                Console.WriteLine("Update cancelled. Returning to main menu...");
-                return;
-            }
-
-            if (subChoice == "1" || subChoice == "3")
-            {
-                Console.WriteLine("Available flights:  OA101,OA102,OA103,OA104,OA105,OA106 ");
-            }
-
-            Console.Write("Enter new flight number: ");
-            string inputFlight = Console.ReadLine()?.Trim().ToUpper();
-
-            if(string.IsNullOrEmpty(inputFlight))
-            {
-                Console.WriteLine("Error: Flight number cannot be empty.Update failed.");
-                return;
-            }
-
-
-            if(subChoice == "2" || subChoice =="3")
-            {
-                Console.WriteLine("Enter new date (YYY-MM_DD): ");
-                string inputData = Console.ReadLine()?.Trim();
-
-                if(string.IsNullOrEmpty(inputData))
+                int matchingIndex = ticketNumbers.IndexOf(validate);
+                if (matchingIndex == -1)
                 {
-                    Console.WriteLine("Error: Date cannot be empty. Update failed.");
+                    Console.WriteLine($"Error: Ticket ID '{validate}' does not exist.");
                     return;
                 }
 
-            }
-            if(subChoice !="1" && subChoice != "2" && subChoice !="3")
-            {
-                Console.WriteLine("Invalid selection. Update failed.");
-                return;
-            }
+                if (cancelledTickets.Contains(validate))
+                {
+                    Console.WriteLine("This ticket has been cancelled. Cannot update.");
+                    return;
+                }
+
+                if (!bookingRecord.TryGetValue(validate, out string rawBookingValue))
+                {
+                    Console.WriteLine("No booking found for this ticket.");
+                    return;
+                }
+
+                string[] bookingDetails = rawBookingValue.Split('|');
+                string oldFlight = bookingDetails[0];
+                string oldDate = bookingDetails[1];
+
+                Console.WriteLine("\n=== Current Booking Details ===");
+                Console.WriteLine($"Flight Number: {oldFlight}");
+                Console.WriteLine($"Flight Date  : {oldDate}");
+                Console.WriteLine("===============================\n");
+
+                Console.WriteLine("===================================================");
+                Console.WriteLine("What type of change do you want?");
+                Console.WriteLine("===================================================");
+                Console.WriteLine("1. Change flight please enter flight number");
+                Console.WriteLine("2. Change date please enter new date");
+                Console.WriteLine("3  Change both ");
+                Console.WriteLine("0  Cancel update");
+
+                string subChoice = Console.ReadLine()?.Trim();
+
+                if (subChoice == "0")
+                {
+                    Console.WriteLine("Update cancelled. Returning to main menu...");
+                    return;
+                }
+
+                if (subChoice != "1" && subChoice != "2" && subChoice != "3")
+                {
+                    Console.WriteLine("Invalid selection. Update failed.");
+                    return;
+                }
+
+                string inputFlight = oldFlight;
+                string inputData = oldDate;
+
+                if (subChoice == "1" || subChoice == "3")
+                {
+                    Console.WriteLine("\nAvailable flights:  OA101,OA102,OA103,OA104,OA105,OA106 ");
+                    Console.Write("Enter new flight number: ");
+                    inputFlight = Console.ReadLine()?.Trim().ToUpper();
+
+                    if (string.IsNullOrEmpty(inputFlight))
+                    {
+                        Console.WriteLine("Error: Flight number cannot be empty. Update failed.");
+                        return;
+                    }
+                }
+
+                if (subChoice == "2" || subChoice == "3")
+                {
+                    Console.Write("\nEnter new date (YYYY-MM-DD): ");
+                    inputData = Console.ReadLine()?.Trim();
+
+                    if (string.IsNullOrEmpty(inputData))
+                    {
+                        Console.WriteLine("Error: Date cannot be empty. Update failed.");
+                        return;
+                    }
+                }
+
+                string updatedValue = $"{inputFlight}|{inputData}";
+                bookingRecord[validate] = updatedValue;
+
+                Console.WriteLine("\n=============================================");
+                Console.WriteLine("       BOOKING UPDATE CONFIRMATION           ");
+                Console.WriteLine("=============================================");
+                Console.WriteLine($"Ticket ID: {validate}");
+                Console.WriteLine($"Passenger: {passengerNames[matchingIndex]}");
+                Console.WriteLine("---------------------------------------------");
+                Console.WriteLine($"{"Details",-15} | {"Old Booking",-15} | {"New Booking",-15}");
+                Console.WriteLine("---------------------------------------------");
+                Console.WriteLine($"{"Flight Number",-15} | {oldFlight,-15} | {inputFlight,-15}");
+                Console.WriteLine($"{"Flight Date",-15} | {oldDate,-15} | {inputData,-15}");
+                Console.WriteLine("=============================================");
+                Console.WriteLine("Booking updated successfully!\n");
             
 
 
-            
 
 
 
-
-
-
-        } // 5 Still only 1 finish
+        } // 5 
 
 
         public static void CancelTicket()
         {
+            Console.WriteLine("Please enter ticket ID ");
+            string validate = Console.ReadLine()?.Trim().ToUpper();
+
+            int matchingindex = ticketNumbers.IndexOf(validate);
+            if(matchingindex == -1)
+            {
+                Console.WriteLine($"Error: Ticket ID '{validate}' dose not exist. ");
+                return;
+            }
+
+            if(cancelledTickets.Contains(validate))
+            {
+                Console.WriteLine($"Error. that ticket alredy cancelled ");
+                return;
+            }
+
+            string passengerName = passengerNames[matchingindex];
 
 
 
 
-        } //6
+        } //6 still
 
 
         public static void PassengerCheckIn()
